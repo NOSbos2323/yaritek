@@ -12,6 +12,7 @@ const Home = lazy(() => import("./components/home"));
 const LoginPage = lazy(() => import("./components/auth/LoginPage"));
 const PaymentsPage = lazy(() => import("./components/payments/PaymentsPage"));
 const LandingPage = lazy(() => import("./components/LandingPage"));
+const VideoGuidePage = lazy(() => import("./components/guide/VideoGuidePage"));
 
 // Simple loading component
 const PageLoader = () => (
@@ -75,6 +76,7 @@ const PWARouter = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/payments" element={<PaymentsPage />} />
+      <Route path="/guide" element={<VideoGuidePage />} />
 
       {/* Tempo routes */}
       {import.meta.env.VITE_TEMPO === "true" && (

@@ -24,6 +24,7 @@ import {
   BarChart3,
   Calendar,
   DollarSign,
+  Play,
 } from "lucide-react";
 
 // Lazy load components for better performance with retry logic
@@ -53,6 +54,7 @@ const PWAInstallBanner = lazy(() => import("./ui/pwa-install-banner"));
 const MemberDialog = lazy(() => import("./attendance/MemberDialog"));
 const DesktopSidebar = lazy(() => import("./layout/DesktopSidebar"));
 const UserGuide = lazy(() => import("./guide/UserGuide"));
+const VideoGuidePage = lazy(() => import("./guide/VideoGuidePage"));
 const ContentLock = lazy(() => import("./ui/content-lock"));
 
 import { formatNumber } from "@/lib/utils";
@@ -216,7 +218,7 @@ const HomePage = () => {
         if (timerStart) {
           const startTime = parseInt(timerStart, 10);
           const currentTime = new Date().getTime();
-          const thirtyMinutes = 30 * 60 * 1000; // 30 minutes in milliseconds
+          const oneWeek = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
           // Validate the timer values
           if (!isNaN(startTime) && !isNaN(currentTime) && startTime > 0) {
@@ -230,7 +232,7 @@ const HomePage = () => {
               shouldLock: elapsedTime >= thirtyMinutes,
             });
 
-            if (elapsedTime >= thirtyMinutes) {
+            if (elapsedTime >= oneWeek) {
               setIsContentLocked(true);
             } else {
               setIsContentLocked(false);
@@ -295,6 +297,7 @@ const HomePage = () => {
   const [showAddMemberDialog, setShowAddMemberDialog] = React.useState(false);
   const [showSettingsPage, setShowSettingsPage] = React.useState(false);
   const [showUserGuide, setShowUserGuide] = React.useState(false);
+  const [showVideoGuide, setShowVideoGuide] = React.useState(false);
 
   // Listen for custom events from settings page
   React.useEffect(() => {
@@ -437,6 +440,7 @@ const HomePage = () => {
               onSettingsClick={() => setShowSettingsPage(true)}
               onSearchClick={() => setActiveTab("attendance")}
               onUserGuideClick={() => setShowUserGuide(true)}
+              onVideoGuideClick={() => setActiveTab("video-guide")}
             />
           </Suspense>
         </div>
@@ -512,6 +516,16 @@ const HomePage = () => {
                   <div className="flex items-center gap-2 flex-row-reverse">
                     <BarChart3 className="w-4 h-4" />
                     <span>التقارير</span>
+                  </div>
+                </TabsTrigger>
+
+                <TabsTrigger
+                  value="video-guide"
+                  className="data-[state=active]:bg-slate-600 data-[state=active]:text-white rounded-md px-3 py-2 text-sm text-slate-300 hover:text-white transition-colors"
+                >
+                  <div className="flex items-center gap-2 flex-row-reverse">
+                    <Play className="w-4 h-4" />
+                    <span>الدليل</span>
                   </div>
                 </TabsTrigger>
               </TabsList>
@@ -642,6 +656,18 @@ const HomePage = () => {
                     }
                   >
                     <ReportsPage />
+                  </Suspense>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="video-guide" className="mt-0 h-full">
+                <div className="h-full">
+                  <Suspense
+                    fallback={
+                      <div className="h-full bg-slate-700/50 rounded-3xl animate-pulse" />
+                    }
+                  >
+                    <VideoGuidePage onBack={() => setActiveTab("dashboard")} />
                   </Suspense>
                 </div>
               </TabsContent>

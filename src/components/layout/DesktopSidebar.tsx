@@ -19,6 +19,7 @@ import {
   EyeOff,
   X,
   BookOpen,
+  Play,
 } from "lucide-react";
 import {
   Dialog,
@@ -39,6 +40,7 @@ interface DesktopSidebarProps {
   onSettingsClick?: () => void;
   onSearchClick?: () => void;
   onUserGuideClick?: () => void;
+  onVideoGuideClick?: () => void;
 }
 
 const DesktopSidebar = ({
@@ -47,6 +49,7 @@ const DesktopSidebar = ({
   onSettingsClick = () => {},
   onSearchClick = () => {},
   onUserGuideClick = () => {},
+  onVideoGuideClick = () => {},
 }: DesktopSidebarProps) => {
   const navigate = useNavigate();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -1002,6 +1005,26 @@ const DesktopSidebar = ({
             <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <span className="text-xs text-blue-300 font-medium whitespace-nowrap">
                 دليل الاستخدام
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Video Guide Button */}
+          <motion.div
+            className="relative group"
+            whileHover={{ scale: 1.1, y: -5 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-300" />
+            <motion.button
+              className="relative p-3 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 shadow-2xl border-3 border-yellow-400/50 backdrop-blur-sm hover:border-yellow-300/70 transition-all duration-300"
+              onClick={onVideoGuideClick}
+            >
+              <Play size={20} className="text-white drop-shadow-lg" />
+            </motion.button>
+            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-xs text-yellow-300 font-medium whitespace-nowrap">
+                الدليل المرئي
               </span>
             </div>
           </motion.div>

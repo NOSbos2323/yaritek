@@ -111,7 +111,7 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden overflow-y-auto scrollbar-hide">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-yellow-400/10 to-orange-500/10 blur-3xl animate-pulse" />
@@ -122,28 +122,89 @@ const LandingPage = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
+        {/* Navigation Header */}
+        <motion.div
+          className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8 px-4 sm:px-0"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="flex items-center gap-3 mb-4 sm:mb-0">
+            <img
+              src="/yacin-gym-logo.png"
+              alt="Amino Gym Logo"
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-lg border-2 border-yellow-300/50 object-cover"
+            />
+            <h2 className="text-xl sm:text-2xl font-bold text-yellow-400">
+              Amino Gym
+            </h2>
+          </div>
+          <nav className="flex gap-2 sm:gap-3 w-full sm:w-auto overflow-x-auto scrollbar-hide pb-2">
+            <Button
+              variant="ghost"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="text-slate-300 hover:text-yellow-400 hover:bg-slate-800/50 text-sm sm:text-base px-4 py-2 rounded-lg transition-all duration-300 border border-transparent hover:border-yellow-400/30 whitespace-nowrap min-w-[80px] flex-shrink-0"
+            >
+              الرئيسية
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                document
+                  .getElementById("features")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="text-slate-300 hover:text-yellow-400 hover:bg-slate-800/50 text-sm sm:text-base px-4 py-2 rounded-lg transition-all duration-300 border border-transparent hover:border-yellow-400/30 whitespace-nowrap min-w-[80px] flex-shrink-0"
+            >
+              الميزات
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                window.location.href = "/guide";
+              }}
+              className="text-slate-300 hover:text-yellow-400 hover:bg-slate-800/50 text-sm sm:text-base px-4 py-2 rounded-lg transition-all duration-300 border border-transparent hover:border-yellow-400/30 whitespace-nowrap min-w-[80px] flex-shrink-0"
+            >
+              الدليل
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                document
+                  .getElementById("support")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="text-slate-300 hover:text-yellow-400 hover:bg-slate-800/50 text-sm sm:text-base px-4 py-2 rounded-lg transition-all duration-300 border border-transparent hover:border-yellow-400/30 whitespace-nowrap min-w-[80px] flex-shrink-0"
+            >
+              الدعم
+            </Button>
+          </nav>
+        </motion.div>
+
         {/* Header Section */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16 px-4 sm:px-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           {/* Logo */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6 sm:mb-8">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-lg opacity-50 animate-pulse" />
               <img
                 src="/yacin-gym-logo.png"
                 alt="Amino Gym Logo"
-                className="relative h-24 w-24 sm:h-32 sm:w-32 rounded-full shadow-2xl border-4 border-yellow-300/50 object-cover"
+                className="relative h-20 w-20 sm:h-24 sm:w-24 md:h-32 md:w-32 rounded-full shadow-2xl border-4 border-yellow-300/50 object-cover"
               />
             </div>
           </div>
 
           {/* Title */}
           <motion.h1
-            className="text-4xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 bg-clip-text text-transparent px-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -153,7 +214,7 @@ const LandingPage = () => {
 
           {/* Subtitle */}
           <motion.p
-            className="text-xl sm:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto"
+            className="text-lg sm:text-xl md:text-2xl text-slate-300 mb-6 sm:mb-8 max-w-2xl mx-auto px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -163,32 +224,32 @@ const LandingPage = () => {
 
           {/* Install Button */}
           <motion.div
-            className="mb-12"
+            className="mb-8 sm:mb-12 px-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             {isInstalled ? (
-              <Card className="bg-green-500/20 border-green-500/50 p-6 max-w-md mx-auto">
+              <Card className="bg-green-500/20 border-green-500/50 p-4 sm:p-6 max-w-md mx-auto">
                 <div className="flex items-center justify-center gap-3 text-green-400">
-                  <CheckCircle className="w-6 h-6" />
-                  <span className="text-lg font-semibold">
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span className="text-base sm:text-lg font-semibold">
                     التطبيق مثبت بنجاح!
                   </span>
                 </div>
-                <p className="text-green-300 mt-2 text-sm">
+                <p className="text-green-300 mt-2 text-xs sm:text-sm text-center">
                   يمكنك الآن الوصول إلى التطبيق من الشاشة الرئيسية
                 </p>
               </Card>
             ) : (
               <Button
                 onClick={handleInstallApp}
-                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold text-lg px-8 py-4 h-auto shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
+                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 h-auto shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto"
                 size="lg"
               >
-                <Download className="w-6 h-6 mr-3" />
+                <Download className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
                 تثبيت التطبيق
-                <ArrowRight className="w-5 h-5 mr-2" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
               </Button>
             )}
           </motion.div>
@@ -196,7 +257,8 @@ const LandingPage = () => {
 
         {/* Features Section */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+          id="features"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 px-4 sm:px-0"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -227,38 +289,39 @@ const LandingPage = () => {
 
         {/* Platform Support */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16 px-4 sm:px-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.6 }}
         >
-          <h2 className="text-2xl font-bold text-white mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
             متوافق مع جميع الأجهزة
           </h2>
-          <div className="flex justify-center gap-8 text-slate-300">
+          <div className="flex justify-center gap-6 sm:gap-8 text-slate-300">
             <div className="flex flex-col items-center gap-2">
-              <Smartphone className="w-8 h-8 text-yellow-400" />
-              <span className="text-sm">الهاتف المحمول</span>
+              <Smartphone className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
+              <span className="text-xs sm:text-sm">الهاتف المحمول</span>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <Monitor className="w-8 h-8 text-yellow-400" />
-              <span className="text-sm">الحاسوب</span>
+              <Monitor className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
+              <span className="text-xs sm:text-sm">الحاسوب</span>
             </div>
           </div>
         </motion.div>
 
         {/* Benefits */}
         <motion.div
-          className="max-w-4xl mx-auto"
+          id="support"
+          className="max-w-4xl mx-auto px-4 sm:px-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.8 }}
         >
-          <Card className="bg-slate-800/60 border-slate-700/50 p-8">
-            <h2 className="text-2xl font-bold text-center text-white mb-8">
+          <Card className="bg-slate-800/60 border-slate-700/50 p-4 sm:p-6 md:p-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-center text-white mb-6 sm:mb-8">
               لماذا تختار Amino Gym؟
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {[
                 "✅ يعمل بدون انترنت",
                 "✅ واجهة سهلة الاستخدام",

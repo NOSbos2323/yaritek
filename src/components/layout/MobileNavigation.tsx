@@ -16,6 +16,7 @@ import {
   Database,
   Tag,
   Search,
+  Play,
 } from "lucide-react";
 import QrScannerDialog from "../attendance/QrScannerDialog";
 
@@ -380,6 +381,26 @@ const MobileNavigation = ({
             <DollarSign size={16} className="sm:w-5 sm:h-5 text-red-300" />
             <span className="text-[9px] sm:text-xs mt-0.5 sm:mt-1 font-medium text-red-300">
               معلقة
+            </span>
+          </motion.div>
+          <motion.div
+            className={`flex flex-col items-center p-1.5 sm:p-2 rounded-xl min-w-[45px] sm:min-w-[50px] transition-all duration-200 ${activeItem === "video-guide" ? "bg-gradient-to-r from-yellow-500/30 to-orange-500/30 border border-yellow-400/30 shadow-lg" : "hover:bg-white/10 hover:shadow-md"}`}
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            onClick={() => setActiveItem("video-guide")}
+          >
+            <Play
+              size={16}
+              className={`sm:w-5 sm:h-5 ${
+                activeItem === "video-guide"
+                  ? "text-yellow-300"
+                  : "text-gray-300"
+              }`}
+            />
+            <span
+              className={`text-[9px] sm:text-xs mt-0.5 sm:mt-1 font-medium ${activeItem === "video-guide" ? "text-yellow-300" : "text-gray-300"}`}
+            >
+              الدليل
             </span>
           </motion.div>
         </div>
